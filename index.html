@@ -47,6 +47,21 @@
 	<link rel="stylesheet" href="css/bootstrap.css">
 	<!-- Theme style  -->
 	<link rel="stylesheet" href="css/style.css">
+	<style>
+	p{
+		padding-left: 20px;
+		padding-right: 20px;
+		padding-top: 5px;
+		padding-bottom: 5px;
+	}
+	img{
+		margin: 0% auto;
+	}
+	button{
+		align-content: right; 
+	}
+	</style>
+
 
 	<!-- Modernizr JS -->
 	<script src="js/modernizr-2.6.2.min.js"></script>
@@ -154,19 +169,21 @@
 
 							</div>   
 						</div>
+					<!-- <button type="button" name="load_data" id="load_data" class="btn btn-info">Load Data</button> -->
 						<div class="col-md-6">
 						 <div class="panel panel-danger">
-							<div class="fh5co-blog animate-box">
-								<a href="#"><img class="img-responsive" src="images/work-4.jpg" alt=""></a>
-								<div class="blog-text">
-									<h3><a href=""#>45 Minimal Workspace Rooms for Web Savvys</a></h3>
-									<span class="posted_on">Nov. 15th</span>
-									<span class="comment"><a href="">21<i class="icon-speech-bubble"></i></a></span>
-									<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-									<a href="#" class="btn btn-primary">Read More</a>
-								</div> 
+							<div class="fh5co-blog animate-box" id="sompret">
+										<a href="#"><img class="img-responsive" src="images/work-4.jpg" alt=""></a>
+										<div class="blog-text">
+											<h3><a href=""#>45 Minimal Workspace Rooms for Web Savvys</a></h3>
+											<span class="posted_on">Nov. 15th</span>
+											<span class="comment"><a href="">21<i class="icon-speech-bubble"></i></a></span>
+											<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+											<a href="#" class="btn btn-primary">Read More</a>
+										</div> 
+								
 							</div>
-							</div>
+							</div> 
 						</div>
 					</div>
 				</div>
@@ -220,6 +237,66 @@
 	<script src="js/jquery.waypoints.min.js"></script>
 	<!-- Main -->
 	<script src="js/main.js"></script>
+
+	<script>
+		function timedRefresh(timeoutPeriod) {
+		setTimeout("location.reload(true);",timeoutPeriod);}
+		window.onload = timedRefresh(45000);
+		  $.ajax({
+		   url:"js/post.csv",
+		   dataType:"text",
+		   success:function(data)
+		   {
+			var post_data = data.split(/\r?\n|\r/);
+			var table_data = '';
+			for(var count = 1; count<6; count++)
+			{
+			 var cell_data = post_data[count].split(",");
+			 table_data += '';
+			 for(var cell_count=0; cell_count<cell_data.length; cell_count++)
+			 {
+				 var title ;
+				 var paragraph ;
+				 var button ;
+				 var tgl ;
+				 var img ;
+			  if(count === 0)
+			  {
+			   //table_data += '<th>'+cell_data[cell_count]+'</th>';
+				} else if((cell_count+1) === 1){
+					title = cell_data[cell_count];
+				} else if((cell_count+1) === 2){
+					paragraph = cell_data[cell_count];
+				} else if((cell_count+1) === 3){
+					button = cell_data[cell_count];
+				} else if(cell_count+1 === 4){
+					tgl = cell_data[cell_count];
+				} else if(cell_count+1 === 5){
+					img =cell_data[cell_count];
+				}
+			  {
+			   table_data += `<div class="col-md-6"><div class="panel panel-danger"><div class="fh5co-blog animate-box" id="sompret">
+			   					<a href="${img}"><img class="img-responsive" src="${img}" alt=""></a>
+								<div class="blog-text">
+								<h3><a href=""#>${title}</a></h3>
+								<span class="posted_on">${tgl}</span>
+								<span class="comment"><a href="">21<i class="icon-speech-bubble"></i></a></span>
+								<p>${paragraph}</p>
+								<a href="${button}" class="btn btn-primary">Read More</a>
+								</div> 
+							</div>
+							</div> 
+						</div>`;
+			  }
+			 }
+			}
+			$('#sompret').html(table_data);
+		   }
+		  });
+		 
+		
+		</script>
+
 
 	</body>
 </html>

@@ -1,0 +1,24 @@
+{
+  "name": "opininet",
+  "version": "1.0.0",
+  "description": "TITLE: \r Orange - 100% Fully Responsive Free HTML5 Bootstrap Template",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/felatrix/opininet.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/felatrix/opininet/issues"
+  },
+  "homepage": "https://github.com/felatrix/opininet#readme",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.3",
+    "request": "^2.88.0"
+  }
+}
